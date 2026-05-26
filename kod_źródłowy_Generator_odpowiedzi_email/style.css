@@ -1,0 +1,146 @@
+/* Resetowanie domyslnych marginesow, paddingow i box-sizing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Styl dla calego ciala strony */
+body {
+    font-family: 'Roboto', sans-serif; /* Ustawienie czcionki */
+    background: linear-gradient(to bottom, #f4f7f9, #eef2f5); /* Profesjonalny gradient tla */
+    color: #333; /* Kolor tekstu */
+    margin: 0;
+    padding: 0;
+}
+
+/* Kontener glowny */
+.container {
+    max-width: 800px; /* Maksymalna szerokosc kontenera */
+    margin: 50px auto; /* Wysrodkowanie kontenera */
+    padding: 30px; /* Padding wewnatrz kontenera */
+    background-color: #fff; /* Tlo kontenera na bialo */
+    border-radius: 10px; /* Zaokraglone rogi */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Cien wokol kontenera */
+    position: relative;
+}
+
+/* Tytul strony */
+.title {
+    font-size: 28px; /* Rozmiar czcionki */
+    font-weight: 700; /* Pogrubienie czcionki */
+    text-align: center; /* Wysrodkowanie tekstu */
+    margin-bottom: 30px; /* Odstep od dolu */
+    color: #0077b6; /* Kolor tytulu */
+    text-transform: uppercase; /* Przeksztalcenie na wielkie litery */
+}
+
+/* Etykiety formularza */
+label {
+    display: block; /* Wyswietlanie etykiety jako blok */
+    font-size: 16px; /* Rozmiar czcionki */
+    margin-bottom: 8px; /* Odstep od dolu */
+    color: #555; /* Kolor czcionki */
+    font-weight: 600; /* Pogrubienie */
+}
+
+/* Pole tekstowe (textarea) */
+textarea {
+    width: 100%; /* Szerokosc na 100% */
+    padding: 12px; /* Padding wewnatrz */
+    border: 1px solid #ddd; /* Szare obramowanie */
+    border-radius: 6px; /* Zaokraglone rogi */
+    font-size: 16px; /* Rozmiar czcionki */
+    background-color: #f9f9f9; /* Jasnoszare tlo */
+    transition: border-color 0.3s ease, height 0.2s ease; /* Plynna zmiana koloru obramowania */
+    overflow: hidden; /* Ukrycie przewijania */
+}
+
+/* Zmiana koloru obramowania podczas fokusu na polu tekstowym */
+textarea:focus {
+    border-color: #0077b6; /* Zmiana koloru obramowania na niebieski */
+}
+
+/* Grupa przyciskow radiowych */
+.radio-group {
+    display: flex; /* Flexbox, aby rozmieszczac elementy w poziomie */
+    justify-content: space-between; /* Rozdzielenie elementow na rowne odleglosci */
+    width: 70%; /* Szerokosc grupy przyciskow */
+    margin: auto; /* Wysrodkowanie */
+}
+
+/* Etykieta przyciskow radiowych */
+.radio-group label {
+    font-size: 16px; /* Rozmiar czcionki */
+    color: #555; /* Kolor czcionki */
+}
+
+/* Margines po prawej stronie dla przyciskow radiowych */
+input[type="radio"] {
+    margin-right: 8px; /* Odstep po prawej stronie */
+}
+
+/* Styl przycisku */
+.btn {
+    display: block; /* Przyciski na calej szerokosci */
+    width: 100%; /* Szerokosc 100% */
+    padding: 14px; /* Padding wewnatrz */
+    background-color: #0077b6; /* Kolor tla przycisku */
+    color: #fff; /* Kolor tekstu przycisku */
+    font-size: 18px; /* Rozmiar czcionki */
+    border: none; /* Brak obramowania */
+    border-radius: 6px; /* Zaokraglone rogi */
+    cursor: pointer; /* Kursor zmienia sie na reke */
+    transition: background-color 0.3s ease, transform 0.2s; /* Plynna zmiana tla i animacja transformacji */
+}
+
+/* Efekt hover dla przycisku */
+.btn:hover {
+    background-color: #005f87; /* Zmiana koloru tla na ciemniejszy */
+    transform: scale(1.03); /* Lekka animacja powiekszenia */
+}
+
+/* Tytul sekcji z wygenerowana odpowiedzia */
+.generated-title {
+    font-size: 18px; /* Rozmiar czcionki */
+    font-weight: 600; /* Pogrubienie */
+    margin-top: 20px; /* Odstep od gory */
+    margin-bottom: 10px; /* Odstep od dolu */
+    color: #333; /* Kolor tekstu */
+}
+
+/* Styl pola tekstowego z wygenerowana odpowiedzia */
+.output {
+    width: 100%; /* Szerokosc na 100% */
+    padding: 12px; /* Padding wewnatrz */
+    border: 1px solid #ddd; /* Szare obramowanie */
+    border-radius: 6px; /* Zaokraglone rogi */
+    font-size: 16px; /* Rozmiar czcionki */
+    background-color: #f9f9f9; /* Jasnoszare tlo */
+    color: #333; /* Kolor tekstu */
+    min-height: 50px; /* Minimalna wysokosc */
+    resize: none; /* Brak mozliwosci zmiany rozmiaru */
+    overflow: hidden; /* Ukrycie przewijania */
+    transition: all 0.3s ease; /* Plynna zmiana */
+}
+
+/* Zmiana koloru obramowania przy focusu na polu tekstowym */
+.output:focus {
+    border-color: #0077b6; /* Zmiana koloru obramowania na niebieski */
+}
+
+/* Responsywnosc dla urzadzen mobilnych */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px; /* Mniejszy padding na urzadzeniach mobilnych */
+    }
+    .title {
+        font-size: 22px; /* Mniejszy rozmiar czcionki tytulu */
+    }
+    .btn {
+        font-size: 16px; /* Mniejszy rozmiar czcionki przycisku */
+    }
+    .generated-title {
+        font-size: 16px; /* Mniejszy rozmiar czcionki tytulu odpowiedzi */
+    }
+}

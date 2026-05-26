@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <!-- Ustawienia podstawowe dokumentu -->
+    <meta charset="UTF-8">  <!-- Okresla kodowanie znakow na UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  <!-- Ustawienia responsywnosci strony -->
+    <title>Generuj Odpowiedź - Korporacyjny Styl</title>  <!-- Tytul strony w pasku przegladarki -->
+
+    <!-- Linki do zewnetrznych plikow CSS i JS -->
+    <link rel="stylesheet" href="style.css">  <!-- Zewnetrzny plik CSS do stylowania -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>  <!-- GSAP dla animacji -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">  <!-- Font Awesome dla ikon -->
+</head>
+<body>
+    <div class="container">
+        <!-- Naglowek strony -->
+        <h1 class="title"><i class="fas fa-envelope-open-text"></i> Generuj Odpowiedź na E-mail</h1>
+
+        <!-- Formularz do wprowadzenia tresci e-maila -->
+        <div class="form-group">
+            <label for="emailText"><i class="fas fa-edit"></i> Treść e-maila:</label>  <!-- Etykieta z ikona edytora -->
+            <textarea id="emailText" rows="5" placeholder="Wklej treść e-maila" class="input"></textarea>  <!-- Pole tekstowe na e-mail -->
+        </div>
+
+        <!-- Formularz do wyboru charakterystyki odpowiedzi -->
+        <div class="form-group">
+            <br>
+            <label><i class="fas fa-check-circle"></i> Charakter odpowiedzi:</label>
+            <div class="radio-group">
+                <label><input type="radio" name="decision" value="tak" checked> Pozytywna</label>  <!-- Wybor 'tak' -->
+                <label><input type="radio" name="decision" value="nie"> Negatywna</label>  <!-- Wybor 'nie' -->
+            </div>
+            <br>
+        </div>
+
+        <!-- Formularz do wyboru tonu odpowiedzi -->
+        <div class="form-group">
+            <label><i class="fas fa-user-tie"></i> Wybierz ton odpowiedzi:</label>
+            <div class="radio-group">
+                <label><input type="radio" name="tone" value="formalny" checked> Formalny</label>  <!-- Wybor tonu formalnego -->
+                <label><input type="radio" name="tone" value="nieformalny"> Nieformalny</label>  <!-- Wybor tonu nieformalnego -->
+            </div>
+            <br>
+        </div>
+
+        <!-- Przycisk do generowania odpowiedzi -->
+        <button id="generateReply" class="btn"><i class="fas fa-cogs"></i> Generuj Odpowiedź</button>
+
+        <!-- Sekcja z wygenerowana odpowiedzia -->
+        <h3 class="generated-title"><i class="fas fa-reply"></i> Wygenerowana odpowiedź:</h3>
+        <textarea id="generatedReply" rows="5" readonly class="output"></textarea>  <!-- Pole tekstowe na wygenerowana odpowiedz -->
+    </div>
+
+    <!-- Skrypt JavaScript -->
+    <script>
+        // Funkcja do dostosowywania wysokosci pola tekstowego na podstawie jego zawartosci
+        function adjustTextareaHeight(textarea) {
+            textarea.style.height = 'auto';  // Reset wysokosci
+            textarea.style.height = textarea.scrollHeight + 'px';  // Ustaw wysokosc na podstawie scrollHeight
+        }
+
+        // Nasluchiwacz klikniecia na przycisk "Generuj Odpowiedz"
+        document.getElementById('generateReply').addEventListener('click', async () => {
+            // Pobranie wartosci wprowadzonych przez uzytkownika
+            const emailText = document.getElementById('emailText').value;
+            const decision = document.querySelector('input[name="decision"]:checked').value;
+            const tone = document.querySelector('input[name="tone"]:checked').value;
+
+            // Wysylanie zadania do API (serwera Flask)
+            const response = await fetch('http://127.0.0.1:5000/generate_reply', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'  // Wysylamy dane w formacie JSON
+                },
+                body: JSON.stringify({
+                    emailText: emailText,  // Tresc e-maila
+                    decision: decision,  // Decyzja (tak/nie)
+                    tone: tone  // Ton odpowiedzi (formalny/nieformalny)
+                })
+            });
+
+            // Odbieramy odpowiedz z serwera i wyswietlamy ja w polu tekstowym
+            const data = await response.json();
+            const generatedReplyTextarea = document.getElementById('generatedReply');
+            generatedReplyTextarea.value = data.reply || "Błąd generowania odpowiedzi.";  // Wyswietlenie wygenerowanej odpowiedzi
+
+            // Dostosowanie wysokosci pola tekstowego z odpowiedzia
+            adjustTextareaHeight(generatedReplyTextarea);
+        });
+
+        // Animacja na zaladowanie strony
+        window.onload = function() {
+            gsap.from(".container", { duration: 1, opacity: 0, y: -30 });  // Animacja plynnego pojawiania sie kontenera
+        };
+    </script>
+</body>
+</html>
