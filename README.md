@@ -88,3 +88,4 @@ Użytkownik korzysta z aplikacji na własną odpowiedzialność.
 
 Wszelkie klucze API, dane dostępowe oraz konfiguracje bezpieczeństwa powinny być przechowywane wyłącznie lokalnie i nigdy nie powinny być publikowane w publicznych repozytoriach.
 
+Autorzy projektu: Górski Paweł, Gałda Mateusz
